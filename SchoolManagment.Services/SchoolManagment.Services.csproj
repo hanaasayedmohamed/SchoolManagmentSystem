@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <RootNamespace>SchoolManagment.Services</RootNamespace>
+    <AssemblyName>SchoolManagment.Services</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SchoolManagment.Common\SchoolManagment.Common.csproj" />
+    <ProjectReference Include="..\SchoolManagment.EF\SchoolManagment.EF.csproj" />
+  </ItemGroup>
+
+</Project>
