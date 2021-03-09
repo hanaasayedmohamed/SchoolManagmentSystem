@@ -80,6 +80,35 @@ namespace ApiWithbasicAuthentication
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "School Managment API", Version = "v1" });
+
+                // Swagger 2.+ support
+                var security = new Dictionary<string, IEnumerable<string>>
+                {
+                    {"Bearer", new string[] { }},
+                };
+
+                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                {
+                    Description = "JWT Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\"",
+                    Name = "Authorization",
+                    In = ParameterLocation.Header,
+                    Type = SecuritySchemeType.ApiKey
+                });
+
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement() {
+                   {
+                            new OpenApiSecurityScheme
+                            {
+                                Reference = new OpenApiReference
+                                {
+                                    Type = ReferenceType.SecurityScheme,
+                                    Id = "Bearer"
+                                }
+                            },
+                            new string[] { }
+                        }
+                });
+
             });
         }
 
@@ -90,7 +119,6 @@ namespace ApiWithbasicAuthentication
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "School Managment API V1");
-               // c.RoutePrefix = "docs";
             });
 
 
@@ -98,7 +126,7 @@ namespace ApiWithbasicAuthentication
             {
                 app.UseDeveloperExceptionPage();
             }
-   
+
             app.UseHttpsRedirection();
             app.UseRouting();
 

@@ -33,7 +33,7 @@ namespace ApiWithbasicAuthentication.Controllers
         [HttpPost]
         [Authorize]
 
-        public IActionResult Insert([FromBody] Student student)
+        public IActionResult Post([FromBody] Student student)
         {
             var students = _studentService.InsertStudent(student);
             return Ok(students);
