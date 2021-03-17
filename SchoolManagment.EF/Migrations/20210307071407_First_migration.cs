@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace ApiWithbasicAuthentication.EF.Migrations
+namespace SchoolManagment.EF.Migrations
 {
     public partial class First_migration : Migration
     {

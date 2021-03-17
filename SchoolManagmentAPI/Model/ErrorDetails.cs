@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace ApiWithbasicAuthentication.Domain.Model
+namespace SchoolManagmentAPI
 {
     public class ErrorDetails
     {

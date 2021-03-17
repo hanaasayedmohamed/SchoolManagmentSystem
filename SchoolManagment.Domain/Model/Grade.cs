@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ApiWithbasicAuthentication.Domain.Model
+namespace SchoolManagment.Domain.Model
 {
     public class Grade
     {

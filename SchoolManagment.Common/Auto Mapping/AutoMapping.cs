@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using ApiWithbasicAuthentication.Domain.Model;
+using SchoolManagment.Domain.Model;
 using AutoMapper;
 
-namespace ApiWithbasicAuthentication.Common
+namespace SchoolManagment.Common
 {
     public class MappingProfile : Profile
     {

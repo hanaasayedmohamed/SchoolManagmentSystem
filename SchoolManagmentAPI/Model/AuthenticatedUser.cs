@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Security.Principal;
 using System.Text;
 
-namespace ApiWithbasicAuthentication.Domain.Model
+namespace SchoolManagmentAPI
 {
     public class AuthenticatedUser : IIdentity
     {

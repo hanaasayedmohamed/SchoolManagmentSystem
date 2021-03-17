@@ -1,5 +1,5 @@
-﻿using ApiWithbasicAuthentication.Common;
-using ApiWithbasicAuthentication.OAuthToken;
+﻿using SchoolManagment.Common;
+using SchoolManagment.OAuthToken;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ApiWithbasicAuthentication.Controllers
+namespace SchoolManagment.Controllers
 {
     [Route("OAuth")]
     [ApiController]
@@ -17,13 +17,13 @@ namespace ApiWithbasicAuthentication.Controllers
     {
         [HttpGet]
         [Route("Token")]
-
-        public IActionResult GenerateToken()
+        [SchoolManagment.Authentication.BasicAuthorization] //New 
+        public IActionResult GenerateToken( )
         {
 
                 return Ok(new
                 {
-                    access_Token = JwtMiddleware.GenerateToken(),
+                    access_Token = JwtToken.GenerateToken(),
                     Token_Type = "bearer"
                 });
   

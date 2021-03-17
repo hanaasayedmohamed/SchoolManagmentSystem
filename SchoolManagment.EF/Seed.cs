@@ -4,9 +4,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using ApiWithbasicAuthentication.Domain.Model;
+using SchoolManagment.Domain.Model;
 
-namespace ApiWithbasicAuthentication.EF
+namespace SchoolManagment.EF
 {
     public static class SeedData
     {

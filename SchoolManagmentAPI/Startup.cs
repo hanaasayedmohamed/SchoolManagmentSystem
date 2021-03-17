@@ -1,18 +1,13 @@
-using ApiWithbasicAuthentication.Authentication;
-using ApiWithbasicAuthentication.Common;
-using ApiWithbasicAuthentication.Domain.Model;
-using ApiWithbasicAuthentication.EF;
-using ApiWithbasicAuthentication.ExceptionHandler;
-using ApiWithbasicAuthentication.Logging;
-using ApiWithbasicAuthentication.Services;
+using SchoolManagment.Common;
+using SchoolManagment.EF;
+using SchoolManagment.ExceptionHandler;
+using SchoolManagment.Logging;
+using SchoolManagment.Services;
 using AutoMapper;
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -22,11 +17,11 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication;
+using SchoolManagment.Authentication;
 
-namespace ApiWithbasicAuthentication
+namespace SchoolManagmentAPI
 {
     public class Startup
     {
@@ -46,6 +41,8 @@ namespace ApiWithbasicAuthentication
 
             services.AddTransient<IStudentService, StudentService>();
 
+            #region Automapper
+
             var mapperConfig = new MapperConfiguration(mc =>
             {
                 mc.AddProfile(new MappingProfile());
@@ -53,6 +50,13 @@ namespace ApiWithbasicAuthentication
 
             IMapper mapper = mapperConfig.CreateMapper();
             services.AddSingleton(mapper);
+
+            #endregion
+
+            #region jwt Token && basic 
+
+            services
+             .AddAuthentication("BasicAuthentication").AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>("BasicAuthentication" , null);
 
             services
              .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -72,10 +76,13 @@ namespace ApiWithbasicAuthentication
             services.AddAuthorization(options =>
               {
                   options.DefaultPolicy = new AuthorizationPolicyBuilder(JwtBearerDefaults.AuthenticationScheme).RequireAuthenticatedUser().Build();
+                
+                  options.AddPolicy("BasicAuthentication", new AuthorizationPolicyBuilder("BasicAuthentication").RequireAuthenticatedUser().Build());
               });
 
-            var appSettingSection = Configuration.GetSection("AppSettings");
-            services.Configure<AppSettings>(appSettingSection);
+            #endregion
+
+            #region Swagger 
 
             services.AddSwaggerGen(c =>
             {
@@ -110,10 +117,20 @@ namespace ApiWithbasicAuthentication
                 });
 
             });
+            #endregion
+
+            #region  AppSettings 
+
+            var appSettingSection = Configuration.GetSection("AppSettings");
+            services.Configure<AppSettings>(appSettingSection);
+
+            #endregion 
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
         {
+            app.UseCors(options => options.AllowAnyOrigin());
+
             app.UseSwagger();
 
             app.UseSwaggerUI(c =>

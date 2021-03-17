@@ -1,6 +1,6 @@
-﻿using ApiWithbasicAuthentication.Common;
-using ApiWithbasicAuthentication.Domain.Model;
-using ApiWithbasicAuthentication.EF;
+﻿using SchoolManagment.Common;
+using SchoolManagment.Domain.Model;
+using SchoolManagment.EF;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ApiWithbasicAuthentication.Services
+namespace SchoolManagment.Services
 {
     public class StudentService : IStudentService
     {

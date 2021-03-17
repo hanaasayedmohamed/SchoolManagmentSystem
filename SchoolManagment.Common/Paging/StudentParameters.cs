@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ApiWithbasicAuthentication.Common
+namespace SchoolManagment.Common
 {    public class StudentParameters : QueryStringParameters
     {
         public string StudentName { get; set; }

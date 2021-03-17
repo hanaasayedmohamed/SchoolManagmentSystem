@@ -7,7 +7,7 @@ using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ApiWithbasicAuthentication.Logging
+namespace SchoolManagment.Logging
 {
     public class LoggingMiddleware
     {

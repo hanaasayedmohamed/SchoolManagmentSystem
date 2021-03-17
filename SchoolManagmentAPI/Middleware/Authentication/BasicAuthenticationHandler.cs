@@ -1,4 +1,4 @@
-﻿using ApiWithbasicAuthentication.Domain.Model;
+﻿using SchoolManagment.Domain.Model;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
@@ -14,8 +14,9 @@ using System.Text.Encodings.Web;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
+using SchoolManagmentAPI;
 
-namespace ApiWithbasicAuthentication.Authentication
+namespace SchoolManagment.Authentication
 {
     public class BasicAuthenticationHandler : AuthenticationHandler<AuthenticationSchemeOptions>
     {

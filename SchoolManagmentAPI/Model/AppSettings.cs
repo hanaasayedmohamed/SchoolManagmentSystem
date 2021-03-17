@@ -1,4 +1,4 @@
-namespace ApiWithbasicAuthentication.Domain.Model
+namespace SchoolManagmentAPI
 { 
     public class AppSettings
     {

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ApiWithbasicAuthentication.Authentication
+namespace SchoolManagment.Authentication
 {
     public class BasicAuthorizationAttribute : AuthorizeAttribute
     {

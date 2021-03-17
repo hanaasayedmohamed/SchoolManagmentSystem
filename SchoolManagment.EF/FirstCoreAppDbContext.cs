@@ -1,10 +1,10 @@
-﻿using ApiWithbasicAuthentication.Domain.Model;
+﻿using SchoolManagment.Domain.Model;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace ApiWithbasicAuthentication.EF
+namespace SchoolManagment.EF
 {
     public class FirstCoreAppDbContext: DbContext
     {

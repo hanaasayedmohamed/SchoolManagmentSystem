@@ -1,4 +1,4 @@
-﻿using ApiWithbasicAuthentication.Domain.Model;
+﻿using SchoolManagment.Domain.Model;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Options;
@@ -10,9 +10,9 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 
-namespace ApiWithbasicAuthentication.OAuthToken
+namespace SchoolManagment.OAuthToken
 {
-    public static class JwtMiddleware
+    public static class JwtToken
     {
         public static string GenerateToken()
         {
@@ -36,7 +36,7 @@ namespace ApiWithbasicAuthentication.OAuthToken
                             )
                     ),
                  
-                Expires = now.AddMinutes(Convert.ToInt32("5")),
+                Expires = now.AddHours(Convert.ToInt32("1")),
 
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(Encoding.ASCII.GetBytes(symmetricKey)),
                     SecurityAlgorithms.HmacSha256Signature)
@@ -46,7 +46,6 @@ namespace ApiWithbasicAuthentication.OAuthToken
 
             return token;
         }
-
       
     }
 }

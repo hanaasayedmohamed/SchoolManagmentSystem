@@ -1,5 +1,5 @@
-﻿using ApiWithbasicAuthentication.Common;
-using ApiWithbasicAuthentication.Domain.Model;
+﻿using SchoolManagment.Common;
+using SchoolManagment.Domain.Model;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Http;
@@ -9,8 +9,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
+using SchoolManagmentAPI;
 
-namespace ApiWithbasicAuthentication.ExceptionHandler
+namespace SchoolManagment.ExceptionHandler
 {
     public class ExceptionMiddleware
     {

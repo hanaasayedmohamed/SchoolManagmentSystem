@@ -1,11 +1,11 @@
-﻿using ApiWithbasicAuthentication.Common;
-using ApiWithbasicAuthentication.Domain.Model;
+﻿using SchoolManagment.Common;
+using SchoolManagment.Domain.Model;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ApiWithbasicAuthentication.Services
+namespace SchoolManagment.Services
 {
    public interface IStudentService
     {

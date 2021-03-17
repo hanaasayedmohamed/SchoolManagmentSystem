@@ -1,6 +1,6 @@
-﻿using ApiWithbasicAuthentication.Common;
-using ApiWithbasicAuthentication.Domain.Model;
-using ApiWithbasicAuthentication.Services;
+﻿using SchoolManagment.Common;
+using SchoolManagment.Domain.Model;
+using SchoolManagment.Services;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -11,10 +11,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ApiWithbasicAuthentication.Controllers
+namespace SchoolManagment.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("Students")]
     public class StudentsController : ControllerBase
     {
         IStudentService _studentService;
@@ -32,16 +32,17 @@ namespace ApiWithbasicAuthentication.Controllers
 
         [HttpPost]
         [Authorize]
-
-        public IActionResult Post([FromBody] Student student)
+        [Route("InsertStudent")]
+        public IActionResult InsertStudent([FromBody] Student student)
         {
             var students = _studentService.InsertStudent(student);
             return Ok(students);
         }
 
         [HttpGet]
+        [Route("GetAllStudents")]
         [Authorize]
-        public IActionResult Get([FromQuery] StudentParameters parameters)
+        public IActionResult GetAllStudents([FromQuery] StudentParameters parameters)
         {
 
             var students = _studentService.GetStudents(parameters);
