@@ -15,16 +15,19 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using SchoolManagmentAPI;
+using SchoolManagment.Domain;
+using SchoolManagment.Services;
 
 namespace SchoolManagment.Authentication
 {
     public class BasicAuthenticationHandler : AuthenticationHandler<AuthenticationSchemeOptions>
     {
+
         public BasicAuthenticationHandler(
             IOptionsMonitor<AuthenticationSchemeOptions> options,
             ILoggerFactory logger,
-            UrlEncoder encoder,
-            ISystemClock clock
+            UrlEncoder encoder ,
+            ISystemClock clock  
             )
     : base(options, logger, encoder, clock)
         {
@@ -32,7 +35,7 @@ namespace SchoolManagment.Authentication
 
         protected override Task<AuthenticateResult> HandleAuthenticateAsync()
         {
-             Response.Headers.Add("WWW-Authenticate", "Basic");
+            Response.Headers.Add("WWW-Authenticate", "Basic");
 
             if (!Request.Headers.ContainsKey("Authorization"))
             {
@@ -57,7 +60,9 @@ namespace SchoolManagment.Authentication
                 return Task.FromResult(AuthenticateResult.Fail("The username or password is not correct."));
             }
 
-            var authenticatedUser = new AuthenticatedUser("BasicAuthentication", true, "roundthecode");
+           var authenticatedUser = new AuthenticatedUser("BasicAuthentication", true, "roundthecode");
+           // var authenticateResponse = new UserDto() { LastName="" };
+
             var claimsPrincipal = new ClaimsPrincipal(new ClaimsIdentity(authenticatedUser));
 
             return Task.FromResult(AuthenticateResult.Success(

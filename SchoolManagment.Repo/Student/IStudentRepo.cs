@@ -3,13 +3,12 @@ using SchoolManagment.Domain.Model;
 using System;
 using System.Collections.Generic;
 using System.Text;
-using System.Threading.Tasks;
 
-namespace SchoolManagment.Services
+namespace SchoolManagment.Repo
 {
-   public interface IStudentService
+    public interface IStudentRepo
     {
         PagedList<Student> GetStudents(StudentParameters pagingParameter);
-        Student InsertStudent(Student student); // 
+        Student InsertStudent(Student student);
     }
 }

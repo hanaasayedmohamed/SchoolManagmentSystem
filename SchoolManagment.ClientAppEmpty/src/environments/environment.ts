@@ -7,9 +7,9 @@ export const environment = {
   apiUrl: 'https://localhost:5001/',
   generateTokenURL:  "Oauth/Token",
   liststudentsURl: "Students/GetAllStudents?",
-  addnewStudent: "/Students",
-  token:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VySWQiOiIyZTcwMWU2Mi0wOTUzLTRkZDMtOTEwYi1kYzZjYzkzY2NiMGQiLCJVc2VyTmFtZSI6ImhhbmFhIiwiRW1haWwiOiJhZG1pbkBhYnAuaW8iLCJSb2xlIjoiYWRtaW4iLCJuYmYiOjE2MTU5NDE0OTEsImV4cCI6MTYxNTk0NTA5MSwiaWF0IjoxNjE1OTQxNDkxfQ.U9v4FSGy1RgTFLjv3nntCV_6ZsVK-G-vP5HA3huAhdA"
-};
+  addnewStudent: "Students/InsertStudent",
+  loginURL:"User/Authenticate" ,
+  generateAllUsersURL:"User/GetAllUsers"};
 
 /*
  * For easier debugging in development mode, you can import the following file

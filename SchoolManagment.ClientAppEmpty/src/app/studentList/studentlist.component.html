@@ -1,6 +1,36 @@
-<p>studentlist works!</p>
 
 
-<app-studentitem *ngFor="let student of students" >
+<!--<app-studentitem *ngFor="let student of students">
 
-</app-studentitem>
+</app-studentitem>-->
+
+
+<form (ngSubmit)="insertStudent()" [formGroup]="newStudentForm">
+  <div class="imgcontainer">
+    <label>Fill Student Data </label>
+  </div>
+  <div class="container">
+
+    <label for="studentname"><b> Name</b></label>
+    <input type="text" placeholder="Enter student name" formControlName="studentname" required>
+
+    <label for="height"><b>Height</b></label>
+    <input type="number" placeholder="Enter Height" formControlName="height" required>
+
+    <label for="weight"><b>Weight</b></label>
+    <input type="number" placeholder="Enter weight" formControlName="weight" required>
+
+    <label for="gradeId"><b>Grade</b></label>
+    <input type="number" placeholder="selelct grade" formControlName="gradeId" required>
+
+    <label for="DateOfbirth"><b>Grade</b></label>
+    <input type="date" placeholder="Date of birth" formControlName="DateOfbirth" required >
+
+    <button type="submit">Login</button>
+  </div>
+
+</form>
+
+<div *ngFor="let student of students">
+  <label> hana</label>  {{student.studentName}}
+</div>

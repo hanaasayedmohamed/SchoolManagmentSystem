@@ -1,10 +1,12 @@
-export class student {
-  studentid: number = 0;
-  studentname: string = "";
-  Height: number = 0;
-  Weight: number = 0;
-  DateOfBirth: Date = new Date();
-  GradeId: string = "";
-  GradeName: number = 0;
-  Section: string = "";
+export interface student {
+  studentID: number;
+  studentName: string;
+  height: number;
+  weight: number ;
+  dateOfBirth: Date;
+  gradeId: number;
+  gradeName: string ;
+  section: string;
+  photo: string,
+
 }

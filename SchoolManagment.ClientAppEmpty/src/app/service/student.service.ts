@@ -1,46 +1,93 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http'; 
+import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
 import { student } from '../models/student';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { environment } from '../../environments/environment';
+import { catchError } from 'rxjs/operators';
 
-const httpOptions = {
-  headers: new HttpHeaders({
-    'Content-Type': 'application/json'
-  })
-}
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class studentService {
-
+  errorMsg!: string;
+  token: {};
   // studentobjlist: student[] = [];
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    this.token = localStorage.getItem("Token") || {};
+    console.log(this.token);
+  }
 
-  getstudents(jwtToken: string, pageNumber: string, pageSize: string, gradefilter: string): Observable<student[]> {
+  getstudents(jwtToken: string, pageNumber: string, pageSize: string, gradefilter: string):
+    Observable<student[]> {
     //TODO : implement auth  [add jwt token to header ]
-    console.log(`${environment.apiUrl}${environment.liststudentsURl}PageNumber=${pageNumber}&PageSize=${pageSize}&GradeName=${gradefilter}`);
+
+    const getStudentlistURL = `${environment.apiUrl}${environment.liststudentsURl}PageNumber=${pageNumber}&PageSize=${pageSize}&GradeName=${gradefilter}`;
+
+    console.log(getStudentlistURL);
 
     const header = {
       headers: new HttpHeaders({
-      'Content-Type': 'application/json',
+        'Content-Type': 'application/json',
         'Authorization': `Bearer ${jwtToken}`
       })
     }
-    console.log(header);
 
-    return this.http.get<student[]>(`${environment.apiUrl}${environment.liststudentsURl}`, header);
-  }
-  insertnewStudent(newStudent :student) {
-    return this.http.put(`${environment.apiUrl}${environment.addnewStudent}`, newStudent, httpOptions);
+    console.log("getstudents function header JWT " + jwtToken);
+
+    return this.http
+      .get<student[]>(getStudentlistURL, header)
+      .pipe(
+        catchError(error => {
+          let errorMsg: string = "";
+
+          if (error.error instanceof ErrorEvent) {
+            this.errorMsg = `Error: ${error.error.message}`;
+          }
+          else {
+            this.errorMsg = this.getServerErrorMessage(error);
+          }
+          console.log(this.errorMsg);
+
+          return throwError(this.errorMsg);
+        })
+      );
+
+
+    // return this.http.get<student[]>(getStudentlistURL, header);
   }
 
-  generateToken(): Observable<string>{
-    //TODO : implement Auth add user name + password bearer token to headers. 
-    return this.http.get<string>(`${environment.apiUrl}${environment.generateTokenURL}`);
+
+
+  private getServerErrorMessage(error: HttpErrorResponse): string {
+    switch (error.status) {
+      case 404: {
+        return `Not Found: ${error.message}`;
+      }
+      case 403: {
+        return `Access Denied: ${error.message}`;
+      }
+      case 500: {
+        return `Internal Server Error: ${error.message}`;
+      }
+      default: {
+        return `Unknown Server Error: ${error.message}`;
+      }
+
+    }
   }
 
+  insertnewStudent(newStudent: student): Observable<any> {
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${this.token}`
+      })
+    }
+
+    return this.http.post(`${environment.apiUrl}${environment.addnewStudent}`, newStudent, httpOptions);
+  }
 }

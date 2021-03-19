@@ -1,6 +1,6 @@
 ﻿using SchoolManagment.Domain.Model;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Http;
+//using Microsoft.AspNetCore.Authentication.JwtBearer;
+//using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System;
@@ -14,9 +14,8 @@ namespace SchoolManagment.OAuthToken
 {
     public static class JwtToken
     {
-        public static string GenerateToken()
+        public static string GenerateToken(User user)
         {
-            //TODO : read secret from configurations
             var symmetricKey = "minimumSixteenCharacters"; 
 
             var tokenHandler = new JwtSecurityTokenHandler();
@@ -28,10 +27,9 @@ namespace SchoolManagment.OAuthToken
                         new ClaimsIdentity(
                                 new List<Claim>
                                 {
-                                    new Claim("UserId","2e701e62-0953-4dd3-910b-dc6cc93ccb0d"),
-                                    new Claim("UserName","hanaa"),
-                                    new Claim("Email","admin@abp.io") ,
-                                    new Claim("Role","admin")
+                                    new Claim("UserId",user.UserId.ToString()),
+                                    new Claim("UserName",user.Username),
+                                    new Claim("fullname",user.FirstName + user.LastName) ,
                                 }
                             )
                     ),

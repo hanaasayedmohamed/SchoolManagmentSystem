@@ -20,6 +20,7 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.AspNetCore.Authentication;
 using SchoolManagment.Authentication;
+using SchoolManagment.Repo;
 
 namespace SchoolManagmentAPI
 {
@@ -40,6 +41,10 @@ namespace SchoolManagmentAPI
            options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddTransient<IStudentService, StudentService>();
+            services.AddTransient<IStudentRepo, StudentRepo>();
+
+            services.AddTransient<IUserService, UserService>();
+            services.AddTransient<IUserRepo, UserRepo>();
 
             #region Automapper
 
@@ -129,7 +134,12 @@ namespace SchoolManagmentAPI
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
         {
-            app.UseCors(options => options.AllowAnyOrigin());
+            app.UseCors(options => options.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
+
+            //app.UseCors(builder => builder.WithOrigins("https://localhost:4200")
+            //                  .AllowAnyMethod()
+            //                  .WithHeaders("authorization", "accept", "content-type", "origin"));
+
 
             app.UseSwagger();
 

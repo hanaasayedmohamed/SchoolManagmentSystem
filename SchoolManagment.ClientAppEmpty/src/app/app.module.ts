@@ -6,16 +6,28 @@ import { AppComponent } from './app.component';
 import { StudentlistComponent } from './studentList/studentlist.component';
 import { StudentitemComponent } from './studentitem/studentitem.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { LoginComponent } from './login/login.component';
+import { ReactiveFormsModule } from '@angular/forms'; //Reactive Forms
+import { RouterModule } from '@angular/router';
+import { HomeComponent } from './home/home.component';
+import { StudentDetailComponent } from './student-detail/student-detail.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     StudentlistComponent,
-    StudentitemComponent
+    StudentitemComponent,
+    LoginComponent,
+    HomeComponent,
+    StudentDetailComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule, HttpClientModule],
+    ReactiveFormsModule,
+    HttpClientModule,
+    AppRoutingModule,
+    RouterModule
+],
   providers: [],
   bootstrap: [AppComponent]
 })

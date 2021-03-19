@@ -15,7 +15,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SchoolManagment.Common", "S
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolManagment.ClientApp", "SchoolManagment.ClientApp\SchoolManagment.ClientApp.csproj", "{8014980D-EA6F-4F77-BB77-172C30EA1A33}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolManagment.ClientAppEmpty", "SchoolManagment.ClientAppEmpty\SchoolManagment.ClientAppEmpty.csproj", "{0FB9243F-FFBB-45D6-AAAE-964FB321F724}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SchoolManagment.ClientAppEmpty", "SchoolManagment.ClientAppEmpty\SchoolManagment.ClientAppEmpty.csproj", "{0FB9243F-FFBB-45D6-AAAE-964FB321F724}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolManagment.Repo", "SchoolManagment.Repo\SchoolManagment.Repo.csproj", "{51C3CFAB-18C8-442C-8015-4598315C4AA0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,10 @@ Global
 		{0FB9243F-FFBB-45D6-AAAE-964FB321F724}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0FB9243F-FFBB-45D6-AAAE-964FB321F724}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0FB9243F-FFBB-45D6-AAAE-964FB321F724}.Release|Any CPU.Build.0 = Release|Any CPU
+		{51C3CFAB-18C8-442C-8015-4598315C4AA0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{51C3CFAB-18C8-442C-8015-4598315C4AA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{51C3CFAB-18C8-442C-8015-4598315C4AA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{51C3CFAB-18C8-442C-8015-4598315C4AA0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

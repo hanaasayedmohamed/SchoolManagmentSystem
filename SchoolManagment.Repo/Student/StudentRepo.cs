@@ -1,20 +1,19 @@
-﻿using SchoolManagment.Common;
+﻿using Microsoft.EntityFrameworkCore;
+using SchoolManagment.Common;
 using SchoolManagment.Domain.Model;
 using SchoolManagment.EF;
-using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
-namespace SchoolManagment.Services
+namespace SchoolManagment.Repo
 {
-    public class StudentService : IStudentService
+   public class StudentRepo : IStudentRepo
     {
         private readonly FirstCoreAppDbContext _dbContext;
 
-        public StudentService(FirstCoreAppDbContext dbContext)
+        public StudentRepo(FirstCoreAppDbContext dbContext)
         {
             this._dbContext = dbContext;
 
@@ -32,7 +31,21 @@ namespace SchoolManagment.Services
 
         }
 
-        public IQueryable<Student> FindAll()
+        public Student InsertStudent(Student student)
+        {
+            if (IsStudentNameUnique(student.StudentName))
+            {
+                _dbContext.Students.Add(student);
+                _dbContext.SaveChanges();
+                return student;
+            }
+            else
+            {
+                throw new CustomException("Error_409", ResponseErrorMessage.UniqueRuleViolationMessage);
+            }
+        }
+
+        private IQueryable<Student> FindAll()
         {
             return _dbContext.Students.Include(C => C.Grade).AsQueryable();
         }
@@ -44,21 +57,7 @@ namespace SchoolManagment.Services
             students = students.Where(o => o.Grade.GradeName.ToLower().Contains(gradeName.Trim().ToLower()));
         }
 
-        public Student InsertStudent(Student student)
-        {
-            if (IsStudentNameUnique(student.StudentName))
-            {
-                _dbContext.Students.Add(student);
-                _dbContext.SaveChanges();
-                return student;
-            }
-            else
-            {
-                throw new CustomException("Error_409" , ResponseErrorMessage.UniqueRuleViolationMessage);
-            }
-        }
-
-        public bool IsStudentNameUnique(string StudentName)
+        private bool IsStudentNameUnique(string StudentName)
         {
             var student = FindAll().Where(C => C.StudentName == StudentName).FirstOrDefault();
             return (student == null) ? true : false;
