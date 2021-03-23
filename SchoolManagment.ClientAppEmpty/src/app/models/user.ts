@@ -6,5 +6,6 @@ export interface User {
   token: string;
   authenticationType: string,
   isAuthenticated: boolean;
+  ExpireOn: Date
 }
 

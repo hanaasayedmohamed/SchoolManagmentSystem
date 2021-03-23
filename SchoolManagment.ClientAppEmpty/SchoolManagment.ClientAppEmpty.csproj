@@ -7,6 +7,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="src\app\home\**" />
+    <Compile Remove="src\src\**" />
+    <Content Remove="src\app\home\**" />
+    <Content Remove="src\src\**" />
+    <EmbeddedResource Remove="src\app\home\**" />
+    <EmbeddedResource Remove="src\src\**" />
+    <None Remove="src\app\home\**" />
+    <None Remove="src\src\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Update="angular.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>

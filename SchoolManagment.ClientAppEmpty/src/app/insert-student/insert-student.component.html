@@ -1,0 +1,35 @@
+<form (ngSubmit)="insertStudent()" [formGroup]="newStudentForm">
+  <div class="imgcontainer">
+    <label>Fill Student Data </label>
+  </div>
+  <div class="container">
+
+    <label for="studentname"><b> Name</b></label>
+    <input type="text" placeholder="Enter student name" formControlName="studentname" />
+
+    <span *ngIf="! newStudentForm.controls['studentname'].valid && (newStudentForm.controls['studentname'].dirty
+            || newStudentForm.controls['studentname'].touched)"> please enter valid student name</span>
+
+    <label for="height"><b>Height</b></label>
+    <input type="number" placeholder="Enter Height" formControlName="height" />
+
+    <label for="weight"><b>Weight</b></label>
+    <input type="number" placeholder="Enter weight" formControlName="weight" />
+
+    <label for="gradeId"><b>Grade</b></label>
+    <!--<input type="number" placeholder="selelct grade" formControlName="gradeId" />-->
+
+    <select formControlName="gradeId" class="form-control" >
+      <option disabled>Select grade</option>
+      <option [ngValue]="-1">Choose grade</option>
+      <option [ngValue] ="grade.gradeId" *ngFor="let grade of grades" > {{grade.gradeName}}</option>
+    </select>
+
+
+    <label for="DateOfbirth"><b>Date Of Birth</b></label>
+    <input type="date" placeholder="Date of birth" formControlName="DateOfbirth" />
+
+    <button type="submit">Insert</button>
+  </div>
+
+</form>

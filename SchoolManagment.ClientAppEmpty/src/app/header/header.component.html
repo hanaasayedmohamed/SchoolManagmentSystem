@@ -1,0 +1,13 @@
+<nav class="navbar navbar-expand navbar-dark bg-dark">
+  <!--*ngIf="currentUser"-->
+  <div class="navbar-nav">
+    <a class="nav-item nav-link" *ngIf="!isAuthenticated" routerLink="login" routerLinkActive="active">Login</a>
+    <!--<a class="nav-item nav-link" *ngIf="isAuthenticated" >Welcome user : {{userFullName}}</a>-->
+    <a class="nav-item nav-link" routerLink="students" routerLinkActive="active">Students</a>
+    <!--<a class="nav-item nav-link" routerLink="insertstudent">insert</a>-->
+    <a class="nav-item nav-link" routerLink="Grades" routerLinkActive="active">Grades</a>
+    <a class="nav-item nav-link" routerLink="StudentPagings" routerLinkActive="active">StudentPaging</a>
+
+    <a class="nav-item nav-link" (click)="logout()"  *ngIf="isAuthenticated">Logout</a>
+  </div>
+</nav>

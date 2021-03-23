@@ -1,36 +1,49 @@
-
-
 <!--<app-studentitem *ngFor="let student of students">
 
 </app-studentitem>-->
 
-
-<form (ngSubmit)="insertStudent()" [formGroup]="newStudentForm">
-  <div class="imgcontainer">
-    <label>Fill Student Data </label>
+<div class="row">
+  <div class="col-xs-12">
+    <button class="btn btn-success" (click)="onNewStudent()">New Student</button>
   </div>
-  <div class="container">
-
-    <label for="studentname"><b> Name</b></label>
-    <input type="text" placeholder="Enter student name" formControlName="studentname" required>
-
-    <label for="height"><b>Height</b></label>
-    <input type="number" placeholder="Enter Height" formControlName="height" required>
-
-    <label for="weight"><b>Weight</b></label>
-    <input type="number" placeholder="Enter weight" formControlName="weight" required>
-
-    <label for="gradeId"><b>Grade</b></label>
-    <input type="number" placeholder="selelct grade" formControlName="gradeId" required>
-
-    <label for="DateOfbirth"><b>Grade</b></label>
-    <input type="date" placeholder="Date of birth" formControlName="DateOfbirth" required >
-
-    <button type="submit">Login</button>
-  </div>
-
-</form>
-
-<div *ngFor="let student of students">
-  <label> hana</label>  {{student.studentName}}
 </div>
+<hr>
+
+<div class="container">
+  <form [formGroup]="searchForm" (ngSubmit)="onSubmit()">
+    <label for="gradename"><b>Filter| grade name</b></label>
+    <input type="text" formControlName="gradename"><!--[(ngModel)]="listFilter"-->
+    <button type="submit">Filter</button>
+  </form>
+
+</div>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">student name</th>
+      <th scope="col">height</th>
+      <th scope="col">weight</th>
+      <th scope="col">Date of birth</th>
+      <th scope="col">Grade name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let student of filteredStudents | paginate : config; let i=index ">
+      <td>{{student.studentName}}</td>
+      <td>{{student.height}}</td>
+      <td>{{student.weight}}</td>
+      <td> {{ student.dateOfBirth | date :'short'}} </td>
+      <td>{{student.gradeName}}</td>
+    </tr>
+
+  </tbody>
+</table>
+
+<!--<pagination-controls (pageChange)="page = $event"></pagination-controls>-->
+<pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
+
+
+<!-- <div *ngFor="let student of students">
+  <label> hana</label>  {{student.studentName}}
+</div>-->

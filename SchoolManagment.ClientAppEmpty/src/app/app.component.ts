@@ -8,7 +8,12 @@ import { Component } from '@angular/core';
 
 })
 export class AppComponent {
-  title = 'ClientApp';
+  title = 'Student managment';
 
-  logout() { }
+  loadedFeature = 'login';
+
+  onNavigate(feature: string) {
+    this.loadedFeature = feature;
+  }
+
 }

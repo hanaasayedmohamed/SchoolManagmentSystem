@@ -1,12 +1,15 @@
 body {
   font-family: Arial, Helvetica, sans-serif;
 }
+input.ng-invalid.ng-touched {
+border : 1px solid red;
+}
 
 form {
   border: 3px solid #f1f1f1;
 }
 
-input[type=text], input[type=password], input[type=number] {
+input[type=text], input[type=password], input[type=number], input[type=date], select {
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;

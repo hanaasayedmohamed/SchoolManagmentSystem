@@ -9,7 +9,9 @@ export const environment = {
   liststudentsURl: "Students/GetAllStudents?",
   addnewStudent: "Students/InsertStudent",
   loginURL:"User/Authenticate" ,
-  generateAllUsersURL:"User/GetAllUsers"};
+  generateAllUsersURL: "User/GetAllUsers"
+  , generateGradesURL:"Grade/GetAllGrades"
+};
 
 /*
  * For easier debugging in development mode, you can import the following file

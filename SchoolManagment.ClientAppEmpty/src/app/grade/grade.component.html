@@ -1,0 +1,15 @@
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Grade name</th>
+      <th scope="col">section</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let grade of grades">
+      <td>{{grade.gradeName}}</td>
+      <td>{{grade.section}}</td>
+    </tr>
+  </tbody>
+</table>

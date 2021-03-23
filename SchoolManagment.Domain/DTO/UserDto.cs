@@ -14,7 +14,7 @@ namespace SchoolManagment.Domain
         public string Token { get; set; }
 
         public string AuthenticationType { get; }
-
+        public DateTime ExpireOn { get; }
         public bool IsAuthenticated { get; }
         public UserDto()
         { 
@@ -27,6 +27,9 @@ namespace SchoolManagment.Domain
             LastName = user.LastName;
             Username = user.Username;
             Token = token;
+            IsAuthenticated = true;
+            AuthenticationType = "Bearer";
+            ExpireOn = DateTime.Now.AddDays(1);
         }
     }
 }

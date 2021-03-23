@@ -3,7 +3,9 @@ import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular
 import { student } from '../models/student';
 import { Observable, throwError } from 'rxjs';
 import { environment } from '../../environments/environment';
-import { catchError } from 'rxjs/operators';
+import { catchError, map, tap } from 'rxjs/operators';
+import { PaginatePipe } from 'ngx-pagination';
+import { paginateResult } from '../models/user.model';
 
 
 
@@ -12,34 +14,49 @@ import { catchError } from 'rxjs/operators';
 })
 export class studentService {
   errorMsg!: string;
-  token: {};
+  paginateResults: paginateResult = new paginateResult; 
+  // token: {};
   // studentobjlist: student[] = [];
 
   constructor(private http: HttpClient) {
-    this.token = localStorage.getItem("Token") || {};
-    console.log(this.token);
+    //  this.token = localStorage.getItem("Token") || {};
+    // console.log(this.token);
   }
 
-  getstudents(jwtToken: string, pageNumber: string, pageSize: string, gradefilter: string):
-    Observable<student[]> {
-    //TODO : implement auth  [add jwt token to header ]
+  getstudents(pageNumber: string, pageSize: string, gradefilter: string):
 
+    Observable<any> {
+    //TODO : implement auth  [add jwt token to header ]
     const getStudentlistURL = `${environment.apiUrl}${environment.liststudentsURl}PageNumber=${pageNumber}&PageSize=${pageSize}&GradeName=${gradefilter}`;
 
     console.log(getStudentlistURL);
 
-    const header = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${jwtToken}`
-      })
-    }
+    //const header = {
+    //  headers: new HttpHeaders({
+    //    'Content-Type': 'application/json',
+    //    'Authorization': `Bearer ${jwtToken}`
+    //  })
+    //}
 
-    console.log("getstudents function header JWT " + jwtToken);
+    //this.http .get<any>(getStudentlistURL, { observe: 'response' })
 
     return this.http
-      .get<student[]>(getStudentlistURL, header)
+      .get<any>(getStudentlistURL, { responseType: "json", observe: 'response' })
       .pipe(
+        map(Response => {
+
+          console.log(Response.body);
+          console.log(Response.headers.get('X-Pagination'));
+
+          this.paginateResults.result = Response.body;
+
+          if (Response.headers.get('X-Pagination') != null)
+          {
+            this.paginateResults.pagination = JSON.parse(Response.headers.get('X-Pagination') || '{}') ;
+          }
+          return this.paginateResults;
+        }),
+
         catchError(error => {
           let errorMsg: string = "";
 
@@ -53,10 +70,10 @@ export class studentService {
 
           return throwError(this.errorMsg);
         })
+
       );
 
 
-    // return this.http.get<student[]>(getStudentlistURL, header);
   }
 
 
@@ -84,10 +101,10 @@ export class studentService {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${this.token}`
+        // 'Authorization': `Bearer ${this.token}`
       })
     }
 
-    return this.http.post(`${environment.apiUrl}${environment.addnewStudent}`, newStudent, httpOptions);
+    return this.http.post(`${environment.apiUrl}${environment.addnewStudent}`, newStudent);
   }
 }

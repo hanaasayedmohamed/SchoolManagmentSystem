@@ -41,10 +41,14 @@ namespace SchoolManagmentAPI
            options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddTransient<IStudentService, StudentService>();
-            services.AddTransient<IStudentRepo, StudentRepo>();
-
             services.AddTransient<IUserService, UserService>();
+            services.AddTransient<IGradeService, GradeService>();
+
+
+            services.AddTransient<IStudentRepo, StudentRepo>();
             services.AddTransient<IUserRepo, UserRepo>();
+            services.AddTransient<IGradeRepo, GradeRepo>();
+
 
             #region Automapper
 

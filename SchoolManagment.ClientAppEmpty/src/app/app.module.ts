@@ -5,12 +5,20 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { StudentlistComponent } from './studentList/studentlist.component';
 import { StudentitemComponent } from './studentitem/studentitem.component';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LoginComponent } from './login/login.component';
-import { ReactiveFormsModule } from '@angular/forms'; //Reactive Forms
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'; //Reactive Forms
 import { RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { StudentDetailComponent } from './student-detail/student-detail.component';
+import { InsertStudentComponent } from './insert-student/insert-student.component';
+import { studentService } from './service/student.service';
+import { AuthInterceptorService } from './service/auth-interceptor.service';
+import { GradeComponent } from './grade/grade.component';
+import { GradeService } from './service/grade.service';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { StudentsPageingComponent } from './students-pageing/students-pageing.component';
+import { HeaderComponent } from './header/header.component'; // <-- import the module
 
 @NgModule({
   declarations: [
@@ -19,16 +27,24 @@ import { StudentDetailComponent } from './student-detail/student-detail.componen
     StudentitemComponent,
     LoginComponent,
     HomeComponent,
-    StudentDetailComponent
+    StudentDetailComponent,
+    InsertStudentComponent,
+    GradeComponent,
+    StudentsPageingComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
     ReactiveFormsModule,
     HttpClientModule,
     AppRoutingModule,
-    RouterModule
+    RouterModule,
+    NgxPaginationModule,
+    FormsModule
 ],
-  providers: [],
+  providers: [
+    studentService, GradeService , { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

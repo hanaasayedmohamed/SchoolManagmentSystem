@@ -56,6 +56,8 @@ namespace SchoolManagment.Controllers
                 students.HasPrevious
             };
             Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(metadata));
+            Response.Headers.Add("Access-Control-Expose-Headers", "X-Pagination");
+            
             return Ok(studentsList);
 
         }

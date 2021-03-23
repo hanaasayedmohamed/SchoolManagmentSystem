@@ -32,8 +32,7 @@ export class HomeComponent {
     this.token = localStorage.getItem("Token") || {};
     console.log(this.token);
 
-    this.studentService.getstudents(this.token,
-      "1", "2", "").subscribe((studentList: any) => {
+    this.studentService.getstudents("1", "2", "first").subscribe((studentList: any) => {
         console.log(studentList);
         this.students = studentList;
       });

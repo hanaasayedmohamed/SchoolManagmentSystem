@@ -1,17 +1,6 @@
 <!--<app-login></app-login>-->
 <!--<app-studentlist></app-studentlist>-->
-
-<nav class="navbar navbar-expand navbar-dark bg-dark">
-  <!--*ngIf="currentUser"-->
-  <div class="navbar-nav">
-    <a class="nav-item nav-link" routerLink="login" routerLinkActive="active">login</a>
-    <a class="nav-item nav-link" routerLink="/">Home</a>
-    <a class="nav-item nav-link" routerLink="students">Students</a>
-    <a class="nav-item nav-link" (click)="logout()">Logout</a>
-  </div>
-</nav>
-
-<!-- main app container -->
+<app-header> </app-header> <!--(featureSelected)="onNavigate($event)"-->
 <div class="container">
   <router-outlet></router-outlet>
 </div>
